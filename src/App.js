@@ -9,7 +9,14 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-          <CategoriesView />
+          <div className='row'>
+            <div className='col-md-6'>
+              <CategoriesView />
+            </div>
+            <div className='col-md-6'>
+              <CategoriesView />
+            </div>
+          </div>
         </p>
         <a
           className="App-link"
