@@ -9,7 +9,12 @@ export default function NavBar() {
           <h1>Logo</h1>
         </div>
         <div>
-          <Link to="/Users" className='menuButton btn w-100 mb-1 text-start'><i class="bi bi-gear"></i> Usuarios</Link>
+          <button type='button' className='menuButton btn w-100 mb-0 text-start' data-bs-toggle="collapse" data-bs-target="#collapseAdministration" aria-expanded="false" aria-controls="collapseAdministration"><i className="bi bi-gear"></i> Administración</button>
+          <div className="collapse" id="collapseAdministration">
+            <div>
+              <Link to="/Users" className='menuButton btn w-100 mb-1 text-start ps-4'><i className="bi bi-person-check"></i> Usuarios</Link>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
