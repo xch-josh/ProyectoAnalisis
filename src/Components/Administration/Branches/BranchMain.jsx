@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import UsersMainView from './UsersMainView'
+import React, { useEffect, useState } from 'react'
 import SweetAlert from '../../../SweetAlert2.js'
-import { GetUsers, GetUser, Insert, Edit, Delete } from '../../../API_Service/User.js'
+import BranchMainView from './BranchMainView'
 
-export default function UsersMain() {
+import { GetBranches, GetBranch, Insert, Edit, Delete } from '../../../API_Service/Branch.js';
+
+export default function BranchMain() {
   const [data, setData] = useState([]);
   const [reload, setReload] = useState(false);
 
   useEffect(() => {//CARGAR TODOS LOS REGISTROS
     async function onLoadHandle() {
-      const data = await GetUsers();
+      const data = await GetBranches();
       setData(data);
     }
   
@@ -17,7 +18,7 @@ export default function UsersMain() {
   }, [reload]);
   
   const onGetHandle = async (id) => {//OBTENER UN REGISTRO
-    let result = await GetUser(id);
+    let result = await GetBranch(id);
 
     if(result !== false){
       return result;
@@ -52,7 +53,7 @@ export default function UsersMain() {
   
   const onDeleteHandle = async (id) => {//ELIMINAR UN REGISTRO
     let result = await SweetAlert.ShowMessage('¿Desea eliminar el registro?', 'Eliminar datos', 'question');
-
+    
     if (result === true){
       let res = await Delete(id);
 
@@ -61,8 +62,7 @@ export default function UsersMain() {
       }
     }
   };
-
   return (
-    <UsersMainView data={data} onGet={onGetHandle} onSave={onSaveHandle} onEdit={onEditHandle} onDelete={onDeleteHandle} />
+    <BranchMainView data={data} onGet={onGetHandle} onSave={onSaveHandle} onEdit={onEditHandle} onDelete={onDeleteHandle} />
   )
 }
