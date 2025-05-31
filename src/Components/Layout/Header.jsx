@@ -1,8 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 
 export default function Header({logOut}) {
-  const navigate = useNavigate();
 
   const onCloseSessionHandle = () => {
     logOut();
