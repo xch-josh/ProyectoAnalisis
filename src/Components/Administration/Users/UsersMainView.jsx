@@ -9,10 +9,9 @@ export default function UsersMainView() {
                         <h3 className='mb-0'>Usuarios</h3>
                         <hr className='my-0' />
                     </div>
-                    <div className='row mt-4 mb-2 col-sm-12 mx-auto'>
-                        <div className='d-flex justify-content-start col-md-4'>
+                    <div className='row mt-4 mb-2 col-sm-12 mx-auto'>                        <div className='d-flex justify-content-start col-md-4'>
                             <div className='col-md-1 d-flex justify-content-center align-content-center'>
-                                <i class="bi bi-search my-auto"></i>
+                                <i className="bi bi-search my-auto"></i>
                             </div>
                             <div className='col-md-9 px-0'>
                                 <input type="text" id="txtSearch" className='form-control form-control-sm ' placeholder='Buscar' />
