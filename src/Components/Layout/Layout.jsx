@@ -3,12 +3,12 @@ import Header from './Header'
 import NavBar from './NavBar'
 import { Outlet } from 'react-router-dom'
 
-export default function Layout() {
+export default function Layout({logOut}) {
   return (
     <div className='mainUI'>
       <NavBar />
-      <Header />
-      <main className='Content'>
+      <Header logOut={logOut} />
+      <main className='Content overflow-auto'>
         <Outlet />
       </main>
     </div>
