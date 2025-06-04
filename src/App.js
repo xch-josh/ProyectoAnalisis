@@ -22,6 +22,15 @@ import CheckoutView from "./Components/Cart/CheckoutView";
 import ApplyDiscountView from "./Components/Cart/ApplyDiscountView";
 import ToastProvider from "./Components/Layout/ToastProvider";
 
+//PATZAN
+import ProductsMainView from "./Components/Products/ProductsMainView";
+import ProvidersMainView from "./Components/Providers/ProvidersMainView";
+import BrandsMainView from "./Components/Brands/BrandsMainView";
+import CategoriesMainView from "./Components/Categories/CategoriesMainView";
+import MeasuresMainView from "./Components/Measures/MeasuresMainView";
+
+
+
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -70,12 +79,12 @@ function App() {
     try {
       const historyLength = window.history.length;
       window.history.go(-historyLength);
-      
+
       setTimeout(() => {
         window.history.replaceState(null, null, '/');
         window.location.replace('/');
       }, 100);
-      
+
     } catch (error) {
       console.error('Error limpiando historial:', error);
       window.location.replace('/');
@@ -135,18 +144,18 @@ function App() {
                       path="/SelectBranch/:userId"
                       element={<SelectBranch onSelect={onBranchSelect} />}
                     />
-                    
+
                     {/* Rutas principales con Layout */}
                     <Route path="/" element={<Layout logOut={onLogOutHandle} />}>
                       <Route index element={<Navigate to="/" replace />} />
-                      
+
                       {/* Rutas de DANNY */}
                       <Route path="/Users" element={<UsersMain />} />
                       <Route path="/Roles" element={<RolMain />} />
                       <Route path="/RolAccess/:rolId" element={<RolAccessView />} />
                       <Route path="/Branches" element={<BranchMain />} />
                       <Route path="/UserConf/:userId" element={<UserConfiguration />} />
-                      
+
                       {/* Rutas de PABLO */}
                       <Route path="/Clients" element={<ClientsMainView />} />
                       <Route path="/Cart" element={<CartMainView />} />
@@ -154,6 +163,16 @@ function App() {
                       <Route path="/Cart/Remove" element={<RemoveFromCartView />} />
                       <Route path="/Cart/Checkout" element={<CheckoutView />} />
                       <Route path="/Cart/Discount" element={<ApplyDiscountView />} />
+
+                      {/* Rutas de PATZAN */}
+                      <Route path="/Products" element={<ProductsMainView/>} />
+                      <Route path="/Providers" element={<ProvidersMainView />} />
+                      <Route path="/Brands" element={<BrandsMainView />} />
+                      <Route path="/Categories" element={<CategoriesMainView />} />
+                      <Route path="/Measures" element={<MeasuresMainView />} />
+
+                      {/* Rutas de DIEGO */}
+
                     </Route>
                   </>
                 )}
