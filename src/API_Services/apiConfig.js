@@ -1,6 +1,6 @@
 // Configuración general para los servicios de API
 export const API_CONFIG = {
-    BASE_URL: 'http://localhost:5074',
+    BASE_URL: 'https://localhost:44355',
     HEADERS: {
         'Content-Type': 'application/json',
     },

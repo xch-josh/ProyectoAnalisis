@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,32 +19,34 @@ code {
     monospace;
 }
 
-#root{
+#root {
   background-color: #E4EBF1;
   height: 100%;
+  min-height: 100%;
 }
 
-.mainUI{
+.mainUI {
   height: 100%;
   display: grid;
-  grid-template: 
+  grid-template:
     "header" 55px
     "nav"
     "content"
   ;
 
-  .Header{
+  .Header {
     grid-area: header;
     background-color: white;
   }
 
-  .NavBar{
+  .NavBar {
     grid-area: nav;
-    background-color: white;
+    background-color: #468189;
+    color: white;
     border-right: 1px solid gray;
   }
 
-  .Content{
+  .Content {
     grid-area: content;
     background-color: white;
     border-radius: 10px;
@@ -53,7 +55,7 @@ code {
   }
 
   @media (min-width: 992px) {
-    grid-template: 
+    grid-template:
       "nav header" 55px
       "nav content" /
       175px auto
@@ -61,19 +63,113 @@ code {
   }
 }
 
-.menuButton:hover{
-  background-color: rgb(235, 235, 235);
+.menuButton {
+  color: white;
 }
 
-.menuButton:active{
-  background-color: rgb(235, 235, 235);
+.menuButton:hover {
+  background-color: #77ACA2;
+  color: white;
 }
 
-input:focus, input:active {
-  outline: none !important;
-  box-shadow: none !important;
+
+table>thead {
+  background-color: #F4E9CD !important;
 }
 
-.bg-theme-primary{
-  background-color: #249B88 !important;
+.tableContainer {
+  max-height: 450px;
+}
+
+.bg-theme-primary {
+  background-color: #F4E9CD !important;
+}
+
+.btn-theme-aux {
+  background-color: #F4E9CD;
+  color: black;
+}
+
+.btn-theme-aux:hover {
+  background-color: #e8dbba;
+  color: black;
+}
+
+.btn-theme-primary {
+  background-color: #032926;
+  color: white;
+}
+
+.btn-theme-primary:hover {
+  background-color: #0a433d;
+  color: white;
+}
+
+.btn-theme-seccondary {
+  background-color: #9DBEBB;
+  color: black;
+}
+
+.btn-theme-seccondary:hover {
+  background-color: #70a6a2;
+  color: black;
+}
+
+.btn-theme-tertiary {
+  background-color: #77ACA2;
+  color: black;
+}
+
+.btn-theme-tertiary:hover {
+  background-color: rgb(83, 143, 139);
+  color: black;
+}
+
+.btn-theme-danger {
+  background-color: #ce554f;
+  color: white;
+}
+
+.btn-theme-danger:hover {
+  background-color: #c6352e;
+  color: white;
+}
+
+.text-theme-primary {
+  color: #032926;
+}
+
+.text-theme-seccondary {
+  color: #9DBEBB;
+}
+
+.text-theme-tertiary {
+  color: #e8dbba;
+}
+
+.logo {
+  max-width: 75%;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.login {
+  width: 350px;
+}
+
+#headerButtonContent {
+  font-size: 15px;
+}
+
+#dropdownMenuLink {
+  width: 200px;
+}
+
+#profileIcon {
+  width: 50px;
+}
+
+.outline-none:focus {
+  box-shadow: none;
+  outline: none;
 }
