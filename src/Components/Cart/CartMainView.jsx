@@ -138,12 +138,13 @@ export default function CartMainView() {    const { cartItems, removeFromCart, u
                             <thead>
                                 <tr className="text-white" style={{ backgroundColor: '#283593' }}>
                                     <th style={{ width: '80px' }}>Cantidad</th>
-                                    <th style={{ width: '120px' }}>Código</th>
+                                    <th style={{ width: '100px' }}>Código</th>
                                     <th>Producto</th>
                                     <th style={{ width: '100px' }}>Precio</th>
                                     <th style={{ width: '100px' }}>Descuento/Unitario</th>
                                     <th style={{ width: '100px' }}>Precio/Venta</th>
                                     <th style={{ width: '100px' }}>SubTotal</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,22 +159,22 @@ export default function CartMainView() {    const { cartItems, removeFromCart, u
                                                 min="1"
                                             />
                                         </td>
-                                        <td>{item.productId || '-'}</td>
+                                        <td className='text-start'>{item.codeBar}</td>
+                                        <td className='text-start'>{item.productName}</td>
+                                        <td className="text-end">Q{item.unitPrice.toFixed(2)}</td>
+                                        <td className="text-end">Q{item.discount.toFixed(2)}</td>
+                                        <td className="text-end">Q{item.salePrice.toFixed(2)}</td>
+                                        <td className="text-end">Q{item.subtotal.toFixed(2)}</td>
                                         <td>
                                             <div className="d-flex justify-content-between">
-                                                <span>{item.productName}</span>
                                                 <button 
-                                                    className="btn btn-sm btn-danger"
+                                                    className="btn btn-sm btn-danger justify-content-center"
                                                     onClick={() => handleRemoveItem(item.cartId)}
                                                 >
                                                     <i className="bi bi-x"></i>
                                                 </button>
                                             </div>
                                         </td>
-                                        <td className="text-end">Q{item.unitPrice.toFixed(2)}</td>
-                                        <td className="text-end">Q{(0.00).toFixed(2)}</td>
-                                        <td className="text-end">Q{item.unitPrice.toFixed(2)}</td>
-                                        <td className="text-end">Q{(item.unitPrice * item.quantity).toFixed(2)}</td>
                                     </tr>
                                 ))}
                             </tbody>

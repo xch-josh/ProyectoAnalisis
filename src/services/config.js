@@ -1,5 +1,5 @@
 // Base URL de la API
-export const API_BASE_URL = 'http://localhost:5074';
+export const API_BASE_URL = 'https://localhost:44355';
 
 // Endpoints de la API
 export const API_ENDPOINTS = {
