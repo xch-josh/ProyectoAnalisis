@@ -43,10 +43,9 @@ export const CartProvider = ({ children }) => {
     try {
       setLoading(true);
       
-      const cartItem = {
-        productId: product.productId,
-        quantity: quantity
-      };
+      const cartItem = JSON.stringify(product);
+
+      console.log(product);
       
       await CartService.addCartItem(cartItem);
       await fetchCartItems(); // Recargar el carrito

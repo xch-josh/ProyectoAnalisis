@@ -210,7 +210,23 @@ export default function AddToCartView() {
                                         <div className="card-footer bg-transparent border-top-0 d-flex justify-content-between">
                                             <button 
                                                 className="btn btn-primary w-100" 
-                                                onClick={() => handleAddToCart(product)}
+                                                onClick={() => {
+                                                    console.log(product);
+
+                                                    const dataModel = {
+                                                        "quantity": quantity,
+                                                        "purchasePrice": product.purchasePrice,
+                                                        "unitPrice": product.unitPrice,
+                                                        "discount": 0,
+                                                        "salePrice": product.unitPrice,
+                                                        "subtotal": (product.unitPrice * quantity),
+                                                        "productId": product.productId,
+                                                        "userId": sessionStorage.getItem('userId'),
+                                                        "branchId": sessionStorage.getItem('branchId')
+                                                    };
+
+                                                    handleAddToCart(dataModel);
+                                                }}
                                                 disabled={loading}
                                             >
                                                 <i className="bi bi-cart-plus"></i> Agregar al carrito
