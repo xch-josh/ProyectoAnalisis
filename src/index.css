@@ -58,7 +58,7 @@ code {
     grid-template:
       "nav header" 55px
       "nav content" /
-      175px auto
+      170px auto
     ;
   }
 }
@@ -83,6 +83,10 @@ table>thead {
 
 .bg-theme-primary {
   background-color: #F4E9CD !important;
+}
+
+.bg-theme-seccondary {
+  background-color: #468189 !important;
 }
 
 .btn-theme-aux {
