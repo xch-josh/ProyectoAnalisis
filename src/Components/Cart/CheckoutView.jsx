@@ -6,14 +6,19 @@ import ClientSelector from './ClientSelector';
 import SaleService from '../../services/SaleService';
 import { toast } from 'react-toastify';
 
-export default function CheckoutView() {
-    const { cartItems, total, subtotal, discount, clearCart } = useCart();
+export default function CheckoutView() {    const { cartItems, total, subtotal, discount, clearCart } = useCart();
     const { selectedClient, clearSelectedClient } = useClientContext();
     const navigate = useNavigate();
     const location = useLocation();
 
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [amountTendered, setAmountTendered] = useState('');
+    const [cardInfo, setCardInfo] = useState({
+        cardNumber: '',
+        cardExpiry: '',
+        cardCvc: '',
+        cardName: ''
+    });
     const [customerInfo, setCustomerInfo] = useState({
         name: '',
         phone: '',
@@ -39,20 +44,33 @@ export default function CheckoutView() {
     const [errors, setErrors] = useState({});
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [change, setChange] = useState(0);
-    const [invoiceId, setInvoiceId] = useState('');
-
-    const validateForm = () => {
+    const [invoiceId, setInvoiceId] = useState('');    const validateForm = () => {
         const newErrors = {};
 
         if (paymentMethod === 'cash' && (!amountTendered || parseFloat(amountTendered) < total)) {
             newErrors.amountTendered = 'El monto debe ser mayor o igual al total';
         }
 
+        if (paymentMethod === 'card') {
+            if (!cardInfo.cardNumber || cardInfo.cardNumber.replace(/\s/g, '').length < 13) {
+                newErrors.cardNumber = 'Número de tarjeta inválido';
+            }
+            if (!cardInfo.cardExpiry || !/^\d{2}\/\d{2}$/.test(cardInfo.cardExpiry)) {
+                newErrors.cardExpiry = 'Formato de fecha inválido (MM/AA)';
+            }
+            if (!cardInfo.cardCvc || !/^\d{3,4}$/.test(cardInfo.cardCvc)) {
+                newErrors.cardCvc = 'CVC/CVV inválido';
+            }
+            if (!cardInfo.cardName) {
+                newErrors.cardName = 'Nombre en la tarjeta es requerido';
+            }
+        }
+
         // En una aplicación real, podrías validar más campos según tus requisitos
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-    };    const handleSubmit = async () => {
+    };const handleSubmit = async () => {
         if (!validateForm()) return;
 
         // Calcular cambio si es pago en efectivo
@@ -184,11 +202,10 @@ export default function CheckoutView() {
                         </ul>
                     </div>
 
-                    <div className="text-center my-5">
-                        <i className="bi bi-cart-x" style={{ fontSize: '4rem' }}></i>
+                    <div className="text-center my-5">                        <i className="bi bi-cart-x" style={{ fontSize: '4rem' }}></i>
                         <h4 className="mt-3">No hay productos en el carrito</h4>
                         <p>Agrega productos antes de proceder al pago</p>
-                        <Link to="/Cart/Add" className="btn btn-primary mt-2">
+                        <Link to="/Cart/Add" className="btn btn-theme-seccondary mt-2">
                             <i className="bi bi-plus-lg"></i> Agregar productos
                         </Link>
                     </div>
@@ -274,8 +291,7 @@ export default function CheckoutView() {
                                             <label className='form-check-label' htmlFor='cashPayment'>
                                                 Efectivo
                                             </label>
-                                        </div>
-                                        <div className='form-check me-4'>
+                                        </div>                                        <div className='form-check'>
                                             <input 
                                                 className='form-check-input' 
                                                 type='radio' 
@@ -288,23 +304,8 @@ export default function CheckoutView() {
                                                 Tarjeta
                                             </label>
                                         </div>
-                                        <div className='form-check'>
-                                            <input 
-                                                className='form-check-input' 
-                                                type='radio' 
-                                                name='paymentMethod' 
-                                                id='transferPayment'
-                                                checked={paymentMethod === 'transfer'}
-                                                onChange={() => setPaymentMethod('transfer')}
-                                            />
-                                            <label className='form-check-label' htmlFor='transferPayment'>
-                                                Transferencia
-                                            </label>
-                                        </div>
                                     </div>
-                                </div>
-
-                                {paymentMethod === 'cash' && (
+                                </div>                                {paymentMethod === 'cash' && (
                                     <div className='mb-3'>
                                         <label htmlFor='amountTendered' className='form-label'>Monto Entregado</label>
                                         <div className='input-group'>
@@ -328,30 +329,80 @@ export default function CheckoutView() {
                                             </small>
                                         )}
                                     </div>
+                                )}                                {paymentMethod === 'card' && (
+                                    <div>
+                                        <div className='mb-3'>
+                                            <label htmlFor='cardNumber' className='form-label'>Número de Tarjeta</label>
+                                            <input 
+                                                type='text' 
+                                                className={`form-control ${errors.cardNumber ? 'is-invalid' : ''}`}
+                                                id='cardNumber'
+                                                placeholder='XXXX XXXX XXXX XXXX'
+                                                maxLength="19"
+                                                value={cardInfo.cardNumber}
+                                                onChange={(e) => setCardInfo({...cardInfo, cardNumber: e.target.value})}
+                                            />
+                                            {errors.cardNumber && (
+                                                <div className='invalid-feedback'>{errors.cardNumber}</div>
+                                            )}
+                                        </div>
+                                        <div className='row mb-3'>
+                                            <div className='col'>
+                                                <label htmlFor='cardExpiry' className='form-label'>Fecha de Expiración</label>
+                                                <input 
+                                                    type='text' 
+                                                    className={`form-control ${errors.cardExpiry ? 'is-invalid' : ''}`}
+                                                    id='cardExpiry'
+                                                    placeholder='MM/AA'
+                                                    maxLength="5"
+                                                    value={cardInfo.cardExpiry}
+                                                    onChange={(e) => setCardInfo({...cardInfo, cardExpiry: e.target.value})}
+                                                />
+                                                {errors.cardExpiry && (
+                                                    <div className='invalid-feedback'>{errors.cardExpiry}</div>
+                                                )}
+                                            </div>
+                                            <div className='col'>
+                                                <label htmlFor='cardCvc' className='form-label'>CVC/CVV</label>
+                                                <input 
+                                                    type='text' 
+                                                    className={`form-control ${errors.cardCvc ? 'is-invalid' : ''}`}
+                                                    id='cardCvc'
+                                                    placeholder='XXX'
+                                                    maxLength="4"
+                                                    value={cardInfo.cardCvc}
+                                                    onChange={(e) => setCardInfo({...cardInfo, cardCvc: e.target.value})}
+                                                />
+                                                {errors.cardCvc && (
+                                                    <div className='invalid-feedback'>{errors.cardCvc}</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className='mb-3'>
+                                            <label htmlFor='cardName' className='form-label'>Nombre en la Tarjeta</label>
+                                            <input 
+                                                type='text' 
+                                                className={`form-control ${errors.cardName ? 'is-invalid' : ''}`}
+                                                id='cardName'
+                                                placeholder='Nombre como aparece en la tarjeta'
+                                                value={cardInfo.cardName}
+                                                onChange={(e) => setCardInfo({...cardInfo, cardName: e.target.value})}
+                                            />
+                                            {errors.cardName && (
+                                                <div className='invalid-feedback'>{errors.cardName}</div>
+                                            )}
+                                        </div>
+                                    </div>
                                 )}                                <h5 className='card-title mb-3 mt-4'>Acciones Rápidas</h5>
-                                <div className='list-group mb-4'>
+                                <div className='mb-4'>
                                     <button 
-                                        className='list-group-item list-group-item-action d-flex align-items-center fw-bold'
-                                        style={{ 
-                                            backgroundColor: '#3050ff', 
-                                            color: 'white', 
-                                            border: '2px solid #2040cc',
-                                            padding: '10px 15px',
-                                            margin: '5px 0'
-                                        }}
+                                        className='btn btn-theme-tertiary btn-sm outline-none w-100 mb-2'
                                         onClick={handleClienteClick}
                                     >
-                                        <i className="bi bi-person-fill me-2" style={{ fontSize: '1.2rem' }}></i> {selectedClient ? 'Cambiar Cliente' : 'Seleccionar Cliente'}
+                                        <i className="bi bi-person-fill me-2"></i> {selectedClient ? 'Cambiar Cliente' : 'Seleccionar Cliente'}
                                     </button>
                                     <button 
-                                        className='list-group-item list-group-item-action d-flex align-items-center fw-bold'
-                                        style={{ 
-                                            backgroundColor: selectedClient ? '#ff3030' : '#aaaaaa', 
-                                            color: 'white', 
-                                            border: selectedClient ? '2px solid #cc0000' : '2px solid #999999',
-                                            padding: '10px 15px',
-                                            margin: '5px 0'
-                                        }}
+                                        className='btn btn-theme-danger btn-sm outline-none w-100'
                                         onClick={() => {
                                             if(selectedClient) {
                                                 // Limpiar el cliente seleccionado
@@ -366,7 +417,7 @@ export default function CheckoutView() {
                                         }}
                                         disabled={!selectedClient}
                                     >
-                                        <i className="bi bi-trash-fill me-2" style={{ fontSize: '1.2rem' }}></i> Quitar Cliente
+                                        <i className="bi bi-trash-fill me-2"></i> Quitar Cliente
                                     </button>
                                 </div>
                                 
@@ -474,16 +525,14 @@ export default function CheckoutView() {
                                         <span>Total:</span>
                                         <span>Q{total.toFixed(2)}</span>
                                     </div>
-                                </div>
-
-                                <div className='d-grid gap-2 mt-3'>
+                                </div>                                <div className='d-grid gap-2 mt-3'>
                                     <button 
-                                        className='btn btn-success'
+                                        className='btn btn-theme-tertiary btn-sm outline-none'
                                         onClick={handleSubmit}
                                     >
                                         <i className='bi bi-check-circle'></i> Finalizar Compra
                                     </button>
-                                    <Link to="/Cart" className='btn btn-outline-secondary'>
+                                    <Link to="/Cart" className='btn btn-theme-aux btn-sm outline-none'>
                                         <i className='bi bi-arrow-left'></i> Volver al Carrito
                                     </Link>
                                 </div>
@@ -510,10 +559,8 @@ export default function CheckoutView() {
                                     <p className="mb-1"><strong>Monto recibido:</strong> Q{parseFloat(amountTendered).toFixed(2)}</p>
                                     <p className="mb-1"><strong>Cambio:</strong> Q{change.toFixed(2)}</p>
                                 </>
-                            )}
-                            <p className="mb-1"><strong>Método de pago:</strong> {
-                                paymentMethod === 'cash' ? 'Efectivo' : 
-                                paymentMethod === 'card' ? 'Tarjeta' : 'Transferencia'
+                            )}                            <p className="mb-1"><strong>Método de pago:</strong> {
+                                paymentMethod === 'cash' ? 'Efectivo' : 'Tarjeta'
                             }</p>
                             
                             {selectedClient && (
@@ -523,11 +570,9 @@ export default function CheckoutView() {
                                     <p className="mb-1"><strong>Teléfono:</strong> {selectedClient.phone}</p>
                                 </div>
                             )}
-                        </div>
-
-                        <div className="d-grid">
+                        </div>                        <div className="d-grid">
                             <button 
-                                className="btn btn-primary"
+                                className="btn btn-theme-seccondary btn-sm outline-none"
                                 onClick={handleFinishSale}
                             >
                                 <i className="bi bi-arrow-right"></i> Continuar
