@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ProductForm from './ProductForm';
 import ProductService from './ProductService';
+import ProductAPIService from '../../API_Services/ProductAPIService';
 
 export default function ProductsMainView() {
     // Estado para almacenar los productos
@@ -19,7 +20,12 @@ export default function ProductsMainView() {
         setLoading(true);
         try {
             // La API ahora ya incluye los datos relacionados gracias al Include en EF Core
-            const data = await ProductService.getAll();
+            let data = [];
+
+            if(sessionStorage.getItem('branchId') && sessionStorage.getItem('branchId') !== 0){
+                data = await ProductAPIService.getAll(sessionStorage.getItem('branchId'));
+            }
+
             setProducts(data);
         } catch (error) {
             console.error('Error al cargar productos:', error);
@@ -150,14 +156,11 @@ export default function ProductsMainView() {
                                     <tr>
                                         <th scope="col" className="bg-theme-primary">Código</th>
                                         <th scope="col" className="bg-theme-primary">Nombre</th>
-                                        <th scope="col" className="bg-theme-primary">Precio de Compra</th>
-                                        <th scope="col" className="bg-theme-primary">% Ganancia</th>
                                         <th scope="col" className="bg-theme-primary">Precio Unitario</th>
                                         <th scope="col" className="bg-theme-primary">Medida</th>
                                         <th scope="col" className="bg-theme-primary">Marca</th>
                                         <th scope="col" className="bg-theme-primary">Categoría</th>
-                                        <th scope="col" className="bg-theme-primary">Estado</th>
-                                        <th scope="col" className="bg-theme-primary">Acciones</th>
+                                        <th scope="col" className="bg-theme-primary"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,17 +169,10 @@ export default function ProductsMainView() {
                                             <tr key={product.id}>
                                                 <td>{product.codeBar}</td>
                                                 <td>{product.name}</td>
-                                                <td>${product.purchasePrice.toFixed(2)}</td>
-                                                <td>{product.gainPercentaje}%</td>
-                                                <td>${product.unitPrice.toFixed(2)}</td>
+                                                <td>{product.unitPrice.toFixed(2)}</td>
                                                 <td>{product.measureName}</td>
                                                 <td>{product.brandName}</td>
                                                 <td>{product.categoryName}</td>
-                                                <td>
-                                                    <span className={`badge ${product.state === 'Activo' ? 'bg-success' : 'bg-danger'}`}>
-                                                        {product.state}
-                                                    </span>
-                                                </td>
                                                 <td>
                                                     <button 
                                                         type="button" 
