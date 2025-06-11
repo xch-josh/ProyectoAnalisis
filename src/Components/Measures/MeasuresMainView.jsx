@@ -110,19 +110,10 @@ const MeasuresMainView = () => {
     <div style={{ padding: '20px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <h2>Gestión de Medidas</h2>
-        <button
+        <button className='btn btn-theme-primary'
           onClick={handleNewMeasure}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '14px'
-          }}
         >
-          + Nueva Medida
+          + Nuevo
         </button>
       </div>
 
@@ -172,18 +163,8 @@ const MeasuresMainView = () => {
               color: '#6c757d'
             }}>
               <p>No hay medidas registradas</p>
-              <button
+              <button className='btn btn-theme-primary'
                 onClick={handleNewMeasure}
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#007bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  marginTop: '10px'
-                }}
               >
                 Crear primera medida
               </button>
@@ -215,33 +196,15 @@ const MeasuresMainView = () => {
                   </div>
 
                   <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-                    <button
+                    <button className = "btn btn-theme-seccondary"
                       onClick={() => handleEditMeasure(measure)}
-                      style={{
-                        padding: '6px 12px',
-                        backgroundColor: '#28a745',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer',
-                        fontSize: '12px'
-                      }}
                     >
-                      ✏️ Editar
+                      <i className="bi bi-pencil-square"></i>
                     </button>
-                    <button
+                    <button  className="btn btn-theme-danger"
                       onClick={() => handleDeleteMeasure(measure.measureId)}
-                      style={{
-                        padding: '6px 12px',
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer',
-                        fontSize: '12px'
-                      }}
                     >
-                      🗑️ Eliminar
+                      <i className="bi bi-trash3"></i>
                     </button>
                   </div>
                 </div>

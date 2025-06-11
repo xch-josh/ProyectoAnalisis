@@ -159,18 +159,9 @@ const MeasureForm = ({ measureToEdit, onSave, onCancel }) => {
           >
             Cancelar
           </button>
-          <button
+          <button className='btn btn-theme-primary'
             type="submit"
             disabled={isSubmitting}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: isSubmitting ? '#ccc' : '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              fontSize: '14px'
-            }}
           >
             {isSubmitting 
               ? (measureToEdit ? 'Actualizando...' : 'Creando...') 
