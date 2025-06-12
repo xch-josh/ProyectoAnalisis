@@ -138,6 +138,33 @@ export const ProductAPIService = {
             console.error(`Error al obtener producto formateado con ID ${id}:`, error);
             throw error;
         }
+    },
+
+    GetProductBranches: async (productID) => {
+        try {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/Product/BranchAviable/${productID}`, getRequestConfig());
+            
+            console.log(response);
+
+            return await handleApiResponse(response);
+        } catch (error) {
+            console.error('Error al obtener productos:', error);
+            throw error;
+        }
+    },
+
+    UpdateProductBranches: async (id, productBranches) => {
+        try {
+            const response = await fetch(
+                `${API_CONFIG.BASE_URL}/Product/BranchAviable/${id}`, 
+                getRequestConfig('PUT', productBranches)
+            );
+            
+            return await handleApiResponse(response);
+        } catch (error) {
+            console.error(`Error al actualizar producto con ID ${id}:`, error);
+            throw error;
+        }
     }
 };
 

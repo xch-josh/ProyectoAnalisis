@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom'
 import ProductForm from './ProductForm';
 import ProductService from './ProductService';
 import ProductAPIService from '../../API_Services/ProductAPIService';
@@ -22,7 +23,7 @@ export default function ProductsMainView() {
             // La API ahora ya incluye los datos relacionados gracias al Include en EF Core
             let data = [];
 
-            if(sessionStorage.getItem('branchId') && sessionStorage.getItem('branchId') !== 0){
+            if (sessionStorage.getItem('branchId') && sessionStorage.getItem('branchId') !== 0) {
                 data = await ProductAPIService.getAll(sessionStorage.getItem('branchId'));
             }
 
@@ -46,7 +47,7 @@ export default function ProductsMainView() {
     };
 
     // Función para filtrar productos según el término de búsqueda
-    const filteredProducts = products.filter(product => 
+    const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.codeBar.includes(searchTerm)
     );
@@ -104,7 +105,7 @@ export default function ProductsMainView() {
                 setLoading(false);
             }
         }
-    };    return (
+    }; return (
         <div className='w-100 h-100'>
             <div className='w-100 h-100'>
                 <div className='row'>
@@ -117,20 +118,20 @@ export default function ProductsMainView() {
                             <div className='col-md-1 d-flex justify-content-center align-content-center'>
                                 <i className="bi bi-search my-auto"></i>
                             </div>
-                            <div className='col-md-9 px-0'>                                <input 
-                                    type="text" 
-                                    id="txtSearch"
-                                    autoComplete="off" 
-                                    className='form-control form-control-sm' 
-                                    placeholder='Buscar por nombre o código' 
-                                    value={searchTerm}
-                                    onChange={handleSearch}
-                                />
+                            <div className='col-md-9 px-0'>                                <input
+                                type="text"
+                                id="txtSearch"
+                                autoComplete="off"
+                                className='form-control form-control-sm'
+                                placeholder='Buscar por nombre o código'
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
                             </div>
                         </div>
                         <div className='d-flex justify-content-end col-md-8 mb-1'>
-                            <button 
-                                type='button' 
+                            <button
+                                type='button'
                                 className='btn btn-theme-primary btn-sm'
                                 onClick={handleNewProduct}
                                 disabled={loading}
@@ -141,7 +142,7 @@ export default function ProductsMainView() {
                             </button>
                         </div>
                     </div>
-                    
+
                     {loading ? (
                         <div className="text-center my-3">
                             <div className="spinner-border text-primary" role="status">
@@ -174,15 +175,21 @@ export default function ProductsMainView() {
                                                 <td>{product.brandName}</td>
                                                 <td>{product.categoryName}</td>
                                                 <td>
-                                                    <button 
-                                                        type="button" 
+                                                    <button
+                                                        type="button"
                                                         className="btn btn-sm btn-theme-seccondary me-1"
                                                         onClick={() => handleEditProduct(product)}
                                                     >
                                                         <i className="bi bi-pencil-square"></i>
                                                     </button>
-                                                    <button 
-                                                        type="button" 
+                                                    <Link
+                                                        to={`/ProductBranch/${product.id}`}
+                                                        className='btn btn-sm btn-theme-tertiary me-1 outline-none'
+                                                    >
+                                                        <i className="bi bi-gear"></i>
+                                                    </Link>
+                                                    <button
+                                                        type="button"
                                                         className="btn btn-sm btn-theme-danger"
                                                         onClick={() => handleDeleteProduct(product.id)}
                                                     >
@@ -205,7 +212,7 @@ export default function ProductsMainView() {
 
             {/* Modal para crear/editar producto */}
             {showModal && (
-                <div className="modal fade show" style={{display: 'block', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -213,9 +220,9 @@ export default function ProductsMainView() {
                                 <button type="button" className="btn-close" onClick={handleCloseModal}></button>
                             </div>
                             <div className="modal-body">
-                                <ProductForm 
-                                    product={currentProduct} 
-                                    onSave={handleSaveProduct} 
+                                <ProductForm
+                                    product={currentProduct}
+                                    onSave={handleSaveProduct}
                                     onCancel={handleCloseModal}
                                 />
                             </div>                        </div>

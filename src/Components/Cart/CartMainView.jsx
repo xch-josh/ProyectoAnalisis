@@ -4,7 +4,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useClientContext } from '../../context/ClientContext';
 import ClientSelector from './ClientSelector';
 
-export default function CartMainView() {    const { cartItems, removeFromCart, updateQuantity, total, discount } = useCart();
+export default function CartMainView() {    
+    const { cartItems, removeFromCart, updateQuantity, total, discount } = useCart();
     const { selectedClient, clearSelectedClient } = useClientContext();
     const navigate = useNavigate();
     const location = useLocation();

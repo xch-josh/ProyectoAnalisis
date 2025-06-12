@@ -12,7 +12,6 @@ export default function NavBar() {
         const rolID = sessionStorage.getItem("rolID");
         if (rolID) {
           const data = await GetAccess(rolID);
-          console.log("API Response:", data, "Type:", typeof data); // Para debugging
           
           // Manejar diferentes tipos de respuesta
           if (Array.isArray(data)) {
