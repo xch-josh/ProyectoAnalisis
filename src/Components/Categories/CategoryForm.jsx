@@ -62,7 +62,7 @@ export default function CategoryForm({ category, onSave, onCancel }) {
                 </button>
                 <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="btn btn-theme-primary"
                     disabled={isSaveDisabled}
                 >
                     Guardar
