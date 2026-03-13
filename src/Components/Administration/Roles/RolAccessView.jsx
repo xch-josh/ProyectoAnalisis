@@ -8,10 +8,6 @@ export default function RolAccessView() {
   const [accessData, setAccessData] = useState([]);
   const navigate = useNavigate();
 
-  // ❌ INCORRECTO - No uses async directamente en useEffect
-  // useEffect(async () => {
-
-  // ✅ CORRECTO - Define una función async dentro del useEffect
   useEffect(() => {
     const loadAccessData = async () => {
       if (rolId) {

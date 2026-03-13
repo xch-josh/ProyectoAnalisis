@@ -10,6 +10,7 @@ import BranchMain from "./Components/Administration/Branches/BranchMain";
 import LoginMainView from "./Components/Login/LoginMainView";
 import UserConfiguration from "./Components/Administration/Users/UserConfiguration";
 import SelectBranch from "./Components/Administration/Branches/SelectBranch";
+import ProductBranch from "./Components/Products/ProductBranch";
 
 //PABLO
 import ClientsMainView from "./Components/Administration/Clients/ClientsMainView";
@@ -155,6 +156,7 @@ function App() {
                       <Route path="/RolAccess/:rolId" element={<RolAccessView />} />
                       <Route path="/Branches" element={<BranchMain />} />
                       <Route path="/UserConf/:userId" element={<UserConfiguration />} />
+                      <Route path="/ProductBranch/:productId" element={<ProductBranch />} />
 
                       {/* Rutas de PABLO */}
                       <Route path="/Clients" element={<ClientsMainView />} />

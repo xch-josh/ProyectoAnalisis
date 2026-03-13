@@ -5,7 +5,11 @@ const CartService = {
     // Obtener todos los elementos del carrito
     getCartItems: async () => {
         try {
-            return await ApiService.get(API_ENDPOINTS.CART);
+            if(sessionStorage.getItem('userId') && sessionStorage.getItem('branchId')){
+                return await ApiService.get(`${API_ENDPOINTS.CART}/${sessionStorage.getItem('userId')}/${sessionStorage.getItem('branchId')}`);
+            }
+            else
+                return [];
         } catch (error) {
             console.error('Error al obtener elementos del carrito:', error);
             throw error;

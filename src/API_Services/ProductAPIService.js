@@ -3,9 +3,9 @@ import { API_CONFIG, getRequestConfig, handleApiResponse, transformBoolean, tran
 
 export const ProductAPIService = {
     // Obtener todos los productos
-    getAll: async () => {
+    getAll: async (branchID) => {
         try {
-            const response = await fetch(`${API_CONFIG.BASE_URL}/Product`, getRequestConfig());
+            const response = await fetch(`${API_CONFIG.BASE_URL}/Product/${branchID}`, getRequestConfig());
             return await handleApiResponse(response);
         } catch (error) {
             console.error('Error al obtener productos:', error);
@@ -14,9 +14,9 @@ export const ProductAPIService = {
     },
 
     // Obtener un producto por ID
-    getById: async (id) => {
+    getById: async (branchID, id) => {
         try {
-            const response = await fetch(`${API_CONFIG.BASE_URL}/Product/${id}`, getRequestConfig());
+            const response = await fetch(`${API_CONFIG.BASE_URL}/Product/${branchID}/${id}`, getRequestConfig());
             return await handleApiResponse(response);
         } catch (error) {
             console.error(`Error al obtener producto con ID ${id}:`, error);
@@ -136,6 +136,33 @@ export const ProductAPIService = {
             return ProductAPIService.transformToFrontendFormat(product);
         } catch (error) {
             console.error(`Error al obtener producto formateado con ID ${id}:`, error);
+            throw error;
+        }
+    },
+
+    GetProductBranches: async (productID) => {
+        try {
+            const response = await fetch(`${API_CONFIG.BASE_URL}/Product/BranchAviable/${productID}`, getRequestConfig());
+            
+            console.log(response);
+
+            return await handleApiResponse(response);
+        } catch (error) {
+            console.error('Error al obtener productos:', error);
+            throw error;
+        }
+    },
+
+    UpdateProductBranches: async (id, productBranches) => {
+        try {
+            const response = await fetch(
+                `${API_CONFIG.BASE_URL}/Product/BranchAviable/${id}`, 
+                getRequestConfig('PUT', productBranches)
+            );
+            
+            return await handleApiResponse(response);
+        } catch (error) {
+            console.error(`Error al actualizar producto con ID ${id}:`, error);
             throw error;
         }
     }
