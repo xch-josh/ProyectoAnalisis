@@ -123,12 +123,12 @@ export default function CategoriesMainView() {
                         <div className='d-flex justify-content-end col-md-8 mb-1'>
                             <button 
                                 type='button' 
-                                className='btn btn-primary btn-sm'
+                                className='btn btn-theme-primary btn-sm'
                                 onClick={handleNewCategory}
                                 disabled={loading}
                             >
                                 <span className='mx-2'>
-                                    <i className="bi bi-plus-lg"></i> Nueva Categoría
+                                    <i className="bi bi-plus-lg "></i> Nueva Categoría
                                 </span>
                             </button>
                         </div>
@@ -144,7 +144,7 @@ export default function CategoriesMainView() {
                     ) : (
                         <div>
                             <table className="table table-hover">
-                                <thead className="bg-theme-primary text-white">
+                                <thead className="bg-theme-primary ">
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nombre</th>
@@ -166,17 +166,17 @@ export default function CategoriesMainView() {
                                                 <td>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-warning me-1"
+                                                        className="btn btn-sm btn-theme-seccondary me-1"
                                                         onClick={() => handleEditCategory(category)}
                                                     >
-                                                        <i className="bi bi-pencil-fill"></i>
+                                                        <i className="bi bi-pencil-square"></i>
                                                     </button>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-danger"
+                                                        className="btn btn-sm btn-theme-danger"
                                                         onClick={() => handleDeleteCategory(category.id)}
                                                     >
-                                                        <i className="bi bi-trash-fill"></i>
+                                                        <i className="bi bi-trash3"></i>
                                                     </button>
                                                 </td>
                                             </tr>

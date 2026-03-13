@@ -125,12 +125,12 @@ export default function ProductsMainView() {
                         <div className='d-flex justify-content-end col-md-8 mb-1'>
                             <button 
                                 type='button' 
-                                className='btn btn-primary btn-sm'
+                                className='btn btn-theme-primary btn-sm'
                                 onClick={handleNewProduct}
                                 disabled={loading}
                             >
                                 <span className='mx-2'>
-                                    <i className="bi bi-plus-lg"></i> Nuevo Producto
+                                    <i className="bi bi-plus-lg"></i> Nuevo
                                 </span>
                             </button>
                         </div>
@@ -146,18 +146,18 @@ export default function ProductsMainView() {
                     ) : (
                         <div>
                             <table className="table table-hover">
-                                <thead className="bg-theme-primary text-white">
+                                <thead className="bg-theme-primary">
                                     <tr>
-                                        <th scope="col">Código</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Precio de Compra</th>
-                                        <th scope="col">% Ganancia</th>
-                                        <th scope="col">Precio Unitario</th>
-                                        <th scope="col">Medida</th>
-                                        <th scope="col">Marca</th>
-                                        <th scope="col">Categoría</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col" className="bg-theme-primary">Código</th>
+                                        <th scope="col" className="bg-theme-primary">Nombre</th>
+                                        <th scope="col" className="bg-theme-primary">Precio de Compra</th>
+                                        <th scope="col" className="bg-theme-primary">% Ganancia</th>
+                                        <th scope="col" className="bg-theme-primary">Precio Unitario</th>
+                                        <th scope="col" className="bg-theme-primary">Medida</th>
+                                        <th scope="col" className="bg-theme-primary">Marca</th>
+                                        <th scope="col" className="bg-theme-primary">Categoría</th>
+                                        <th scope="col" className="bg-theme-primary">Estado</th>
+                                        <th scope="col" className="bg-theme-primary">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -180,17 +180,17 @@ export default function ProductsMainView() {
                                                 <td>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-warning me-1"
+                                                        className="btn btn-sm btn-theme-seccondary me-1"
                                                         onClick={() => handleEditProduct(product)}
                                                     >
-                                                        <i className="bi bi-pencil-fill"></i>
+                                                        <i className="bi bi-pencil-square"></i>
                                                     </button>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-danger"
+                                                        className="btn btn-sm btn-theme-danger"
                                                         onClick={() => handleDeleteProduct(product.id)}
                                                     >
-                                                        <i className="bi bi-trash-fill"></i>
+                                                        <i className="bi bi-trash3"></i>
                                                     </button>
                                                 </td>
                                             </tr>

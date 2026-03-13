@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useClientContext } from '../../context/ClientContext';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ClientSelector from './ClientSelector';
 
-export default function RemoveFromCartView() {
-    const { cartItems, removeFromCart, clearCart } = useCart();
+export default function RemoveFromCartView() {    const { cartItems, removeFromCart } = useCart();
     const { selectedClient } = useClientContext();
     const navigate = useNavigate();
-    const location = useLocation();
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [filteredItems, setFilteredItems] = useState([]);
@@ -149,68 +147,12 @@ export default function RemoveFromCartView() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [selectedItems, navigate, handleRemoveSelected, handleSelectAll]);
-
-    // Determinar qué pestaña está activa basada en la ruta actual
-    const isActive = (path) => {
-        return location.pathname === path ? "active" : "";
-    };
-
-    return (
+    }, [selectedItems, navigate, handleRemoveSelected, handleSelectAll]);return (
         <div className='w-100 h-100'>
             <div className='row'>
-                {/* Header con título "Carrito - Quitar Productos" */}
-                <div className='col-12' style={{ backgroundColor: '#283593', color: 'white', padding: '8px 15px', borderRadius: '4px 4px 0 0' }}>
-                    <h3 className='mb-0'>Carrito - Quitar Productos</h3>
-                </div>
-
-                {/* Barra de navegación interna del carrito */}
-                <div className='col-12 bg-light py-2 border-bottom'>
-                    <ul className="nav nav-pills">
-                        <li className="nav-item">
-                            <Link to="/Cart" className={`nav-link ${isActive('/Cart')}`}>
-                                <i className="bi bi-list"></i> Vista general
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Cart/Add" className={`nav-link ${isActive('/Cart/Add')}`}>
-                                <i className="bi bi-plus-lg"></i> Agregar
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Cart/Remove" className={`nav-link ${isActive('/Cart/Remove')}`}>
-                                <i className="bi bi-dash-lg"></i> Quitar
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Cart/Discount" className={`nav-link ${isActive('/Cart/Discount')}`}>
-                                <i className="bi bi-percent"></i> Descuento
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/Cart/Checkout" className={`nav-link ${isActive('/Cart/Checkout')}`}>
-                                <i className="bi bi-credit-card"></i> Pantalla Cobro
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <button className="nav-link" onClick={handleClienteClick}>
-                                <i className="bi bi-person"></i> Cliente
-                            </button>
-                        </li>
-                        <li className="nav-item">
-                            <button 
-                                className="nav-link text-danger" 
-                                onClick={() => {
-                                    if (window.confirm('¿Está seguro que desea vaciar el carrito?')) {
-                                        clearCart();
-                                    }
-                                }}
-                                disabled={cartItems.length === 0}
-                            >
-                                <i className="bi bi-trash"></i> Limpiar
-                            </button>
-                        </li>
-                    </ul>
+                {/* Título simple en negro */}
+                <div className='col-12'>
+                    <h3 className='mb-3' style={{ color: 'black' }}>Carrito - Quitar Productos</h3>
                 </div>
 
                 {/* Sección para buscar y quitar productos */}

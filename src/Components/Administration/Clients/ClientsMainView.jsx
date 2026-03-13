@@ -63,7 +63,7 @@ export default function ClientsMainView() {
                     <div className='d-flex justify-content-end col-md-8 mb-1'>
                         <button 
                             type='button' 
-                            className='btn btn-primary btn-sm'
+                            className='btn btn-theme-primary btn-sm'
                             onClick={() => handleOpenModal()}
                         >
                             <span className='mx-2'>
@@ -74,7 +74,7 @@ export default function ClientsMainView() {
                 </div>
                 <div>
                     <table className="table table-hover">
-                        <thead className="bg-theme-primary text-white">
+                        <thead className="bg-theme-primary">
                             <tr>
                                 <th scope="col">Cliente ID</th>
                                 <th scope="col">Nombre</th>
@@ -103,15 +103,15 @@ export default function ClientsMainView() {
                                         </td>
                                         <td>
                                             <button 
-                                                className="btn btn-sm btn-outline-primary me-2" 
+                                                className="btn btn-sm btn-theme-seccondary me-2" 
                                                 onClick={() => handleOpenModal(client)}
                                             >
-                                                <i className="bi bi-pencil"></i>
+                                                <i className="bi bi-pencil-square"></i>
                                             </button>                                            <button 
-                                                className="btn btn-sm btn-outline-danger" 
+                                                className="btn btn-sm btn-theme-danger" 
                                                 onClick={() => handleDeleteClient(client.clientId)}
                                             >
-                                                <i className="bi bi-trash"></i>
+                                                <i className="bi bi-trash3"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -39,11 +39,11 @@ export default function ClientSelector({ onClose }) {
         <div className="modal show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
             <div className="modal-dialog modal-lg" role="document">
                 <div className="modal-content">
-                    <div className="modal-header bg-theme-primary text-white">
+                    <div className="modal-header bg-theme-primary ">
                         <h5 className="modal-title">Seleccionar Cliente</h5>
                         <button 
                             type="button" 
-                            className="btn-close btn-close-white" 
+                            className="btn-close" 
                             aria-label="Close" 
                             onClick={onClose}
                         ></button>
@@ -62,7 +62,7 @@ export default function ClientSelector({ onClose }) {
                                 />
                             </div>
                             <button 
-                                className="btn btn-success"
+                                className="btn btn-theme-primary"
                                 onClick={handleOpenModal}
                             >
                                 <i className="bi bi-plus-lg"></i> Nuevo Cliente
@@ -99,7 +99,7 @@ export default function ClientSelector({ onClose }) {
                                                 </td>
                                                 <td>
                                                     <button 
-                                                        className="btn btn-sm btn-primary" 
+                                                        className="btn btn-sm btn-theme-seccondary" 
                                                         onClick={() => handleSelectClient(client)}
                                                     >
                                                         Seleccionar

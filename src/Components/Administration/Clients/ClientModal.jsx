@@ -79,13 +79,13 @@ export default function ClientModal({ show, handleClose, handleSave, client }) {
         <div className="modal show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <div className="modal-header bg-theme-primary text-white">
+                    <div className="modal-header bg-theme-primary">
                         <h5 className="modal-title">
                             {client ? 'Editar Cliente' : 'Nuevo Cliente'}
                         </h5>
                         <button 
                             type="button" 
-                            className="btn-close btn-close-white" 
+                            className="btn-close" 
                             aria-label="Close" 
                             onClick={handleClose}
                         ></button>
@@ -178,7 +178,7 @@ export default function ClientModal({ show, handleClose, handleSave, client }) {
                             <div className="modal-footer border-0 px-0">
                                 <button type="button" className="btn btn-secondary" onClick={handleClose}>
                                     Cancelar
-                                </button>                                <button type="submit" className="btn btn-primary">
+                                </button>                                <button type="submit" className="btn btn-theme-primary">
                                     {client ? 'Actualizar' : 'Guardar'}
                                 </button>
                             </div>

@@ -238,7 +238,7 @@ export default function ProductForm({ product, onSave, onCancel }) {
                 <button type="button" className="btn btn-secondary me-2" onClick={onCancel}>
                     Cancelar
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-theme-primary">
                     Guardar
                 </button>
             </div>

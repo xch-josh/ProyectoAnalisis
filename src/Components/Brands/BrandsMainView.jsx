@@ -123,7 +123,7 @@ export default function BrandsMainView() {
                         <div className='d-flex justify-content-end col-md-8 mb-1'>
                             <button 
                                 type='button' 
-                                className='btn btn-primary btn-sm'
+                                className='btn btn-theme-primary btn-sm'
                                 onClick={handleNewBrand}
                                 disabled={loading}
                             >
@@ -144,7 +144,7 @@ export default function BrandsMainView() {
                     ) : (
                         <div>
                             <table className="table table-hover">
-                                <thead className="bg-theme-primary text-white">
+                                <thead className="bg-theme-primary ">
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nombre</th>
@@ -166,17 +166,17 @@ export default function BrandsMainView() {
                                                 <td>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-warning me-1"
+                                                        className="btn btn-sm btn-theme-seccondary me-1"
                                                         onClick={() => handleEditBrand(brand)}
                                                     >
-                                                        <i className="bi bi-pencil-fill"></i>
+                                                        <i className="bi bi-pencil-square"></i>
                                                     </button>
                                                     <button 
                                                         type="button" 
-                                                        className="btn btn-sm btn-danger"
+                                                        className="btn btn-sm btn-theme-danger"
                                                         onClick={() => handleDeleteBrand(brand.id)}
                                                     >
-                                                        <i className="bi bi-trash-fill"></i>
+                                                        <i className="bi bi-trash3"></i>
                                                     </button>
                                                 </td>
                                             </tr>
